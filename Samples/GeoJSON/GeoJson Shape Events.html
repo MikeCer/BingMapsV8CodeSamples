@@ -9,7 +9,6 @@
 
     function GetMap() {
         map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey,
             zoom: 2
         });
 
@@ -46,14 +45,12 @@
         infobox.setOptions({location: loc, title: shape.metadata.title, visible: true });
     }
     </script>
-
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>GeoJson Shape Events Sample</legend>
         This sample shows how to add events to shapes loaded from the GeoJSON module and have an infobox displayed when they are clicked.
         The data in this sample is sourced from the <a href="https://earthquake.usgs.gov/">USGS Earthquake Hazards Program</a>.

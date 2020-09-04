@@ -11,16 +11,49 @@ function loadSample(name, path, sourcePath) {
         currentSampleElm.classList.add('selectedNode');
     }
     window.location.hash = encodeURIComponent(name);
-    document.getElementById('displayWindow').src = path;
-    if (sourcePath && sourcePath != '') {
-        document.getElementById('sourceCodeLinkPanel').style.display = '';
-        document.getElementById('newWindowLink').href = path;
-        document.getElementById('sourceCodeLink').href = githubProjectUrl + sourcePath;
+
+    //Download HTML for sample.
+    var xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.open("GET", path, false);
+
+    xmlHttp.onreadystatechange = function () {
+        if (xmlHttp.readyState == 4) {
+            var sampleHtml = xmlHttp.responseText;
+
+            sampleHtml = sampleHtml.replace(/\[YOUR_BING_MAPS_KEY\]/gi, BingMapsKey);
+
+            var iframe = document.getElementById('displayWindow');
+
+            var doc = iframe.document;
+
+            if (iframe.contentDocument) {
+                doc = iframe.contentDocument; // For NS6
+            } else if (iframe.contentWindow) {
+                doc = iframe.contentWindow.document; // For IE5.5 and IE6
+            }
+
+            doc.open();
+            doc.writeln(sampleHtml);
+            doc.close();
+
+            if (sourcePath && sourcePath != '') {
+                document.getElementById('sourceCodeLinkPanel').style.display = '';
+                document.getElementById('newWindowLink').onclick = function () {
+                    var win = window.open();
+                    win.document.write(sampleHtml);
+                };
+                document.getElementById('sourceCodeLink').href = githubProjectUrl + sourcePath;
+            }
+            else {
+                document.getElementById('sourceCodeLinkPanel').style.display = 'none';
+            }
+
+            iframe.focus();            
+        }
     }
-    else {
-        document.getElementById('sourceCodeLinkPanel').style.display = 'none';
-    }
-    document.getElementById('displayWindow').focus();
+
+    xmlHttp.send();  
 }
 
 var spaceRx = /\s/g;
@@ -68,6 +101,8 @@ window.onload = function () {
         hash = hash.replace('#', '');
         loadSampleByHash(hash);
     }
+
+    return false;
 };
 
 $(function () {
@@ -130,5 +165,24 @@ var sampleRedirects = {
     "GeoXmlLayer%20-%20Local%20Data": "GeoXmlLayer%20-%20Same%20Domain",
     "Business%20Search%20Module": "POI%20Search%20Module",
     "GeoData_ChoroplethMap": "GeoData%20Choropleth%20Map",
-    "DrawingTools_CustomToolbar": "Fully%20Custom%Drawing%20Toolbar"
+    "DrawingTools_CustomToolbar": "Fully%20Custom%Drawing%20Toolbar",
+    "QueryAPI%20-%20Load%20all%20results%20(parallel)": "Load%20all%20results%20(parallel)",
+    "QueryAPI%20-%20Load%20all%20results%20(recursive)": "Load%20all%20results%20(recursive)",
+    "QueryAPI_AlongRoute": "Search%20Along%20a%20Route",
+    "QueryAPI_BasicIntersection": "Basic%20Intersection%20Search%20Query",
+    "QueryAPI_ChoroplethMap": "Search%20Result%20Choropleth%20Map",
+    "QueryAPI_DrawSearchArea": "Draw%20Search%20Area",
+    "QueryAPI_FindByProperty": "Find%20By%20Property%20Query",
+    "QueryAPI_Intersection": "Intersection%20Query",
+    "QueryAPI_Paging": "Paging%20Search%20Results",
+    "QueryAPI_SortByDrivingDistance": "Sort%20Query%20Results%20By%20Driving%20Distance",
+    "Map_WithAngular1": "Basic%20Angular%201.6%20Map",
+    "Pushpin%20Bar%20Chart%20(inline%20SVG)": "Bar%20Chart%20Pushpins%20(inline%20SVG)",
+    "RestServices_jQuery": "RestServices_jQuery_JSONP",
+    "Infobox_Custom": "Custom%20Infobox%20HTML%20Content",
+    "Pushpin_DragEvents": "Draggable%20Pushpin",
+    "Clustering_Basic": "Basic%20Clustering",
+    "Clustering_Customization": "Cluster%20Layer%20Customizations",
+    "Pushpin_FontBasedIcons": "Font%20Based%20Pushpin%20Icons",
+    "Pushpin_DynamicCircles": "Scaled%20Circle%20(Bubbles)%20Pushpins"
 };

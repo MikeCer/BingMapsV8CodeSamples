@@ -11,9 +11,7 @@
 
     function GetMap()
     {
-        map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey
-        });
+        map = new Microsoft.Maps.Map('#myMap', {});
 
         //Create an infobox at the center of the map but don't show it.
         infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
@@ -24,7 +22,7 @@
         infobox.setMap(map);
 
         //Register the custom module.
-        Microsoft.Maps.registerModule('HtmlPushpinLayerModule', 'HtmlPushpinLayerModule.js');
+        Microsoft.Maps.registerModule('HtmlPushpinLayerModule', '/Custom Overlays/HtmlPushpinLayer/HtmlPushpinLayerModule.js');
 
         //Load the module.
         Microsoft.Maps.loadModule('HtmlPushpinLayerModule', function () {
@@ -79,8 +77,7 @@
         }
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&branch=experimental' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
     <style>
         .htmlPushpin {
             color:red;
@@ -104,7 +101,7 @@
     <input type="button" value="Clear Layer" onclick="layer.clear();" />
     <input type="button" value="Bring into View" onclick="BringIntoView();" />
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>HTML Pushpin Layer Sample</legend>
         This sample shows how to create a custom layer for display HTML based pushpins using a Custom Overlay.
     </fieldset>

@@ -7,9 +7,7 @@
     var map, watchId, userPin, directionsManager, routePath;
 
     function GetMap() {
-        map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey
-        });
+        map = new Microsoft.Maps.Map('#myMap', {});
 
         //Load the directions and spatial math modules.
         Microsoft.Maps.loadModule(['Microsoft.Maps.Directions'], function () {
@@ -98,16 +96,15 @@
 
         var wp = directionsManager.getAllWaypoints();
         if (wp && wp.length > 0) {
-            for (var i = 0; i < wp.length; i++) {
-                directionsManager.removeWaypoint(wp[i]);
+            for (var i = wp.length - 1; i >= 0; i--) {
+                this.directionsManager.removeWaypoint(wp[i]);
             }
         }
 
         routePath = null;
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:600px;height:600px;"></div>
@@ -118,7 +115,7 @@
     <input type="button" value="Start Continuous Tracking" onclick="startTracking()" />
     <input type="button" value="Stop Continuous Tracking" onclick="stopTracking()" />
     
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>Continuous Tracking and Routing Sample</legend>
         This sample shows how to use the browsers geolocation API to continuous track a users position and their route to a destination on the map.
     </fieldset>

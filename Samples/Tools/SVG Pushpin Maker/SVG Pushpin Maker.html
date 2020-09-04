@@ -3,9 +3,9 @@
 <head>
     <title></title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="SVG Pushpin Maker.css"/>
+    <link rel="stylesheet" href="/Tools/SVG Pushpin Maker/SVG Pushpin Maker.css"/>
 
-    <script type='text/javascript' src='SVGPushpinTemplates.js'></script>
+    <script type='text/javascript' src='/Tools/SVG Pushpin Maker/SVGPushpinTemplates.js'></script>
     <script type='text/javascript'>
         var map,
             currentIdx = 0,
@@ -21,9 +21,7 @@
 
     function GetMap()
     {
-        map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey
-        });
+        map = new Microsoft.Maps.Map('#myMap', {});
                 
         svgSymbols = svgSymbols.sort(sortByDescription);
         svgPushpinTemplates = svgPushpinTemplates.sort(sortByDescription);
@@ -158,12 +156,9 @@
         }
 
         return 0;
-
     }
     </script>
-    
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div class="sidePanel">

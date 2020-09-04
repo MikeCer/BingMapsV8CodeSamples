@@ -6,7 +6,6 @@
     <script type='text/javascript'>
     function GetMap() {
         var map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey,
             center: new Microsoft.Maps.Location(43, -107.55),
             zoom: 5
         });
@@ -37,13 +36,12 @@
         });
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>GeoJson Write Sample</legend>
         This sample shows how generate GeoJSON from n array of Bing Maps shapes.
     </fieldset>

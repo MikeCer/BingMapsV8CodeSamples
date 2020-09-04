@@ -162,6 +162,13 @@ var HtmlPushpin = (function (_super) {
         }
         if (typeof options.visible === 'boolean') {
             this._options.visible = options.visible;
+            if (options.visible) {
+                this._element.style.display = '';
+            }
+            else {
+                this._element.style.display = 'none';
+            }
+            reposition = true;
         }
         if (options.htmlContent) {
             this._options.htmlContent = options.htmlContent;
@@ -352,10 +359,13 @@ var HtmlPushpinLayer = (function (_super) {
         Microsoft.Maps.Events.removeHandler(this._viewChangeEventHandler);
         Microsoft.Maps.Events.removeHandler(this._viewChangeEndEventHandler);
         Microsoft.Maps.Events.removeHandler(this._mapResizeEventHandler);
-        this.getMap().getRootElement().removeEventListener('mousemove', function (e) { _this._updateDragPushpin(e); });
-        document.body.removeEventListener('mouseup', function (e) { if (_this._dragTarget) {
-            _this._dragTarget._pinMouseUp(e);
-        } });
+        var map = this.getMap();
+        if (map) {
+            map.getRootElement().removeEventListener('mousemove', function (e) { _this._updateDragPushpin(e); });
+            document.body.removeEventListener('mouseup', function (e) { if (_this._dragTarget) {
+                _this._dragTarget._pinMouseUp(e);
+            } });
+        }
     };
     /**********************
     * Public Functions
@@ -459,17 +469,19 @@ var HtmlPushpinLayer = (function (_super) {
     * Updates the position of a HTML pushpin element on the map.
     */
     HtmlPushpinLayer.prototype._updatePushpinPosition = function (pin) {
-        var map = this.getMap();
-        if (map) {
-            //Calculate the pixel location of the pushpin.
-            var topLeft = map.tryLocationToPixel(pin.getLocation(), Microsoft.Maps.PixelReference.control);
-            //Offset position to account for anchor.
-            var anchor = pin.getAnchor();
-            topLeft.x -= anchor.x;
-            topLeft.y -= anchor.y;
-            //Update the position of the pushpin element.
-            pin._element.style.left = topLeft.x + 'px';
-            pin._element.style.top = topLeft.y + 'px';
+        if (pin.getVisible()) {
+            var map = this.getMap();
+            if (map) {
+                //Calculate the pixel location of the pushpin.
+                var topLeft = map.tryLocationToPixel(pin.getLocation(), Microsoft.Maps.PixelReference.control);
+                //Offset position to account for anchor.
+                var anchor = pin.getAnchor();
+                topLeft.x -= anchor.x;
+                topLeft.y -= anchor.y;
+                //Update the position of the pushpin element.
+                pin._element.style.left = topLeft.x + 'px';
+                pin._element.style.top = topLeft.y + 'px';
+            }
         }
     };
     HtmlPushpinLayer.prototype._updateDragPushpin = function (e) {

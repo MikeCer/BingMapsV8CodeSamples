@@ -7,9 +7,7 @@
         var map, drawingManager, drawingArea;
 
     function GetMap() {
-        map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey
-        });
+        map = new Microsoft.Maps.Map('#myMap', {});
 
         //Create a random polygon in which to limit the drawing to.
         drawingArea = Microsoft.Maps.TestDataGenerator.getPolygons(1, map.getBounds(), 5, 0.5);
@@ -52,13 +50,12 @@
         }
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>Restrict drawing to Polygon area Sample</legend>
         This sample shows how to restirct the drawing of shapes to such that they must fit inside a specified polygon area. While drawing poly shapes, a preview line will still appear when the mouse is outside of the polygon area, however these will be removed as you draw and complete the shape.
     </fieldset>

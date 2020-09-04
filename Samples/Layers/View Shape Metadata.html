@@ -8,9 +8,7 @@
 
     function GetMap()
     {
-        map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey
-        });
+        map = new Microsoft.Maps.Map('#myMap', {});
 
         //Create a layer.
         var layer = new Microsoft.Maps.Layer();
@@ -66,15 +64,14 @@
         document.getElementById('outputArea').innerHTML = html.join('');
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
 
     <div id="outputArea" style="margin:10px"></div>
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>View Shape Metadata Sample</legend>
         This sample adds a click event to a layer. When any shape in the layer is clicked, it's metadata is then displayed as a table.
     </fieldset>

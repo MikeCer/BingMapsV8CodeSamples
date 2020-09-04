@@ -7,9 +7,7 @@
     var map, infobox, dataLayer, poiSearchManager;
 
     function GetMap() {
-        map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey
-        });
+        map = new Microsoft.Maps.Map('#myMap', {});
 
         //Create an infobox at the center of the map but don't show it.
         infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
@@ -47,7 +45,7 @@
         });
 
         //Register and load the POI Search module.
-        Microsoft.Maps.registerModule('PoiSearchModule', 'PoiSearchModule.js')
+        Microsoft.Maps.registerModule('PoiSearchModule', '/Search/POI%20Search/PoiSearchModule.js')
         Microsoft.Maps.loadModule('PoiSearchModule', function () {
             poiSearchManager = new Microsoft.Maps.Search.PoiSearchManager(map);
             poiSearchManager.debug = true;
@@ -95,8 +93,7 @@
         alert('No results found');
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:500px;"></div>
@@ -108,7 +105,7 @@
     Search: <input type="text" id="searchTbx" value="pizza in New York" />
     <input type="button" onclick="search()" value="Search" />
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>POI Search Module Sample</legend>
         This sample shows how to create a module that adds free from query support to a data source in the Bing Spatial Data Services. 
         In this case the NAVTEQ data sources are used to provide poi/business results for queries.

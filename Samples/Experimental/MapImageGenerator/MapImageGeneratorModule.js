@@ -2,7 +2,7 @@
 /**
  * A simple class for generating an image from a map.
  */
-var MapImageGenerator = (function () {
+var MapImageGenerator = /** @class */ (function () {
     /**********************
     * Constructor
     ***********************/
@@ -13,8 +13,8 @@ var MapImageGenerator = (function () {
      */
     function MapImageGenerator(map, options) {
         this._options = {
-            darkBingLogoUrl: 'BingLogoDark.png',
-            lightBingLogoUrl: 'BingLogoLight.png'
+            darkBingLogoUrl: '/Common/images/BingLogoDark.png',
+            lightBingLogoUrl: '/Common/images/BingLogoLight.png'
         };
         this._map = map;
     }
@@ -95,7 +95,29 @@ var MapImageGenerator = (function () {
             var ctx = mapCanvas.getContext('2d');
             for (var i = 0; i < canvases.length; i++) {
                 var c = canvases[i];
-                ctx.drawImage(c, c.offsetLeft, c.offsetTop);
+                var offsetLeft = 0;
+                var offsetTop = 0;
+                var width = mapCanvas.width;
+                var height = mapCanvas.height;
+                // skip canvases with zero height or width
+                if (c.width === 0 || c.height === 0) {
+                    continue;
+                }
+                if (c.width != mapCanvas.width && c.height != mapCanvas.height) {
+                    offsetLeft = c.offsetLeft * -1;
+                    offsetTop = c.offsetTop * -1;
+                    width = mapCanvas.width;
+                    height = mapCanvas.height;
+                    var sw = parseInt(c.style.width);
+                    if (sw !== c.width) {
+                        var scale = c.width / sw;
+                        offsetLeft *= scale;
+                        offsetTop *= scale;
+                        width *= scale;
+                        height *= scale;
+                    }
+                }
+                ctx.drawImage(c, offsetLeft, offsetTop, width, height, 0, 0, mapCanvas.width, mapCanvas.height);
             }
             var logoUrl;
             switch (this._map.getMapTypeId()) {
@@ -105,7 +127,7 @@ var MapImageGenerator = (function () {
                     break;
                 case Microsoft.Maps.MapTypeId.streetside:
                     throw 'Streetside is not supported.';
-                case Microsoft.Maps.MapTypeId['birdseye']:
+                case Microsoft.Maps.MapTypeId.birdseye:
                 case Microsoft.Maps.MapTypeId.ordnanceSurvey:
                     throw 'The Bing Maps terms of use does not allow printing this type of imagery.';
                 default:

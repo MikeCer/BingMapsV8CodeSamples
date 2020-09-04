@@ -8,9 +8,7 @@
 
     function GetMap()
     {
-        map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey
-        });
+        map = new Microsoft.Maps.Map('#myMap', {});
 
         //Create a layer for managing custom waypoints.
         directionWaypointLayer = new Microsoft.Maps.Layer();
@@ -151,13 +149,12 @@
         infobox.setOptions({ visible: false });
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>Fully Custom Waypoint Pushpins Sample</legend>
         This sample shows how to hide the default route waypoint pushpins and create completely custom pushpins for the waypoints, and instruction steps. 
     </fieldset>

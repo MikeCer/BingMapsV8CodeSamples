@@ -6,7 +6,6 @@
     <script type='text/javascript'>
     function GetMap() {
         var map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey,
             center: new Microsoft.Maps.Location(53.32, -110.29),
             zoom: 3,
             mapTypeId: Microsoft.Maps.MapTypeId.aerial
@@ -133,8 +132,7 @@
         }
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
     <style>
         .mapContainer {
             position: relative;
@@ -177,7 +175,7 @@
         <div id="legend"></div>
     </div>
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>GeoData Choropleth Map Sample</legend>
         This sample shows how to create a simple choropleth map which retrieves boundary data from the GeoData API in the Bing Spatial Data Services. 
         Using the GeoData API provides two key bbenifits; you don't have find and host the boundary data your self, 

@@ -5,10 +5,9 @@
     <meta charset="utf-8" />
     <script type='text/javascript'>
     var map, layer;
-        //TODO: remove experimental
+       
     function GetMap() {
         map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey,
             zoom: 1
         });
 
@@ -27,8 +26,7 @@
         layer.setDataSource(xmlUrl, true);
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&branch=experimental' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
@@ -45,6 +43,7 @@
         <input type="button" value="UK Tourist Locations" onclick="readXml('/Common/data/gpx/Tourist_locations_UK-England.xml');" />
         <br />
         KML:
+        <input type="button" value="2007 San Diego Fires" onclick="readXml('/Common/data/kml/2007SanDiegoCountyFires.kml');" />
         <input type="button" value="Countries" onclick="readXml('/Common/data/kml/Countries.kml');" />
         <input type="button" value="London Tube Lines" onclick="readXml('/Common/data/kml/London%20Tube%20Lines.kml');" />
         <input type="button" value="London Tube Stations" onclick="readXml('/Common/data/kml/London%20stations.kml');" />        
@@ -64,7 +63,7 @@
         <input type="button" onclick="layer.setVisible(true);" value="Show" />
     </div>
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>GeoXmlLayer - Local Data Sample</legend>
         This sample shows how to load geospatial XML data from locally hosted files.<br />
 <b>Note:</b> Not all file and mime types are enabled in all servers. If using .NET, it is recommended to add the following to the web.config file:

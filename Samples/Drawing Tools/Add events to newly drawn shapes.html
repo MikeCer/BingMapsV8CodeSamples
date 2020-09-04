@@ -7,9 +7,7 @@
     var map, baseLayer, drawingManager;
 
     function GetMap() {
-        map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey
-        });
+        map = new Microsoft.Maps.Map('#myMap', {});
 
         //Load the DrawingTools module
         Microsoft.Maps.loadModule('Microsoft.Maps.DrawingTools', function () {
@@ -54,13 +52,12 @@
         }
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&branch=experimental' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>Add events to newly drawn shapes sample</legend>
         This sample shows how to add events to a shape that has just been drawn on the map. This is achieved by moving a shape 
         from the drawing layer to a seperate base layer which has the events on it. 

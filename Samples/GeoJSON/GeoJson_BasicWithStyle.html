@@ -6,7 +6,6 @@
     <script type='text/javascript'>
     function GetMap() {
         var map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey,
             mapTypeId: Microsoft.Maps.MapTypeId.aerial,
             center: new Microsoft.Maps.Location(47.642, -122.128),
             zoom: 18
@@ -40,13 +39,12 @@
         });
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>GeoJson Basic with default Style Sample</legend>
         This sample shows how to read GeoJSON data that is in a local variable and apply a set of style options when it is being read.
     </fieldset>

@@ -12,7 +12,6 @@
         
     function GetMap() {
         var map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey,
             center: new Microsoft.Maps.Location(-2.79, 120),
             zoom: 4,
             mapTypeId: Microsoft.Maps.MapTypeId.grayscale
@@ -99,8 +98,7 @@
         }
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
     <style>
         .mapContainer {
             position: relative;
@@ -143,7 +141,7 @@
         <div id="legend"></div>
     </div>
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>Indonesian Province Census Map Sample</legend>
         This sample shows how to create a simple choropleth map which retrieves boundary data from the GeoData API in the Bing Spatial Data Services.
         The choropleth data is for 2010 census population data of Indonesian provinces.

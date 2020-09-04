@@ -7,9 +7,7 @@
         var map, searchManager;
 
     function GetMap() {
-        map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey
-        });
+        map = new Microsoft.Maps.Map('#myMap', {});
 
         Microsoft.Maps.loadModule(['Microsoft.Maps.AutoSuggest', 'Microsoft.Maps.Search'], function () {
             var manager = new Microsoft.Maps.AutosuggestManager({ map: map });
@@ -88,8 +86,7 @@
         searchManager.geocode(searchRequest);
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id='searchBoxContainer'>
@@ -101,7 +98,7 @@
 
     <div id='output' style="margin-left:10px;float:left;"></div>
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>Autosuggest with Search button Sample</legend>
         This sample shows how to add a search button to an autosuggest box for situations where the user wants to geocode their input rather than select a suggestion from the list.
     </fieldset>

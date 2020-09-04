@@ -12,7 +12,6 @@
 
     function GetMap() {
         map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey,
             zoom: 5,
             enableCORS: true //Need to enable CORs so that the map canvas data can be retrieved. 
         });
@@ -20,7 +19,7 @@
         addMockData();
 
         //Register and load the module.
-        Microsoft.Maps.registerModule('MapImageGeneratorModule', 'MapImageGeneratorModule.js');
+        Microsoft.Maps.registerModule('MapImageGeneratorModule', '/Experimental/MapImageGenerator/MapImageGeneratorModule.js');
         Microsoft.Maps.loadModule('MapImageGeneratorModule', function () {
             imageGenerator = new MapImageGenerator(map);
         });        
@@ -50,8 +49,16 @@
     function downloadMapImage() {
         imageGenerator.getBlob(function (mapImgBlob) {
             saveAs(mapImgBlob, "mapImage.png");
-        }, function (e) {
-            alert(e.message);
+        }, function (e)
+        {
+                if (e.message)
+                {
+                    alert(e.message);
+                }
+                else
+                {
+                    alert(e);
+                }
         });
     }
 
@@ -91,8 +98,7 @@
         });
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&branch=experimental' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div style="height:400px;">
@@ -105,14 +111,23 @@
     <input type="button" value="Open in new window" onclick="openInNewWindow()"/> 
     <input type="button" value="Download" onclick="downloadMapImage()" />
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>Map Image Generator Sample</legend>
         Status: Functional <br /><br />
-        Warning: This is an experimental sample that uses the map in an unsupported way. This can break at any time.<br/><br />
+        
         This sample shows how to generate an image of the map. Pushpin images must be hosted locally, or be dataUri's. 
-        The following elements are not rendered; navigation controls, scale bars, Infoboxes, AnimatedTileLayers, TileLayers, 
-        and most Custom Overlays. Bing Maps terms of use does not allow Ordnance Survey or Birdseye imagery to be "printed". 
-        Streetside imagery is not supported.
+        Bing Maps terms of use does not allow Ordnance Survey or Birdseye imagery to be "printed". 
+        Streetside imagery is not supported. <br/><br />
+
+        Known Limitations:<br />
+        <ul>
+            <li>TileLayer's and Pushpin images must either be hosted on the same domain as the website or have CORs enabled on their hosting server.</li>
+            <li>SVG pushpins currently not supported in IE11.</li>
+            <li>The following elements are not rendered; navigation controls, scale bars, Infoboxes, AnimatedTileLayers,
+        and most Custom Overlays.</li>
+            <li>IE and Edge will not cache tiles when CORS is enabled.</li>
+            <li>Chrome throws errors when this property is set enabled and custom tile layers don’t have CORS enabled on the server.</li>
+        </ul>
     </fieldset>
 </body>
 </html>

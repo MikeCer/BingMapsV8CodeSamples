@@ -10,12 +10,11 @@
     function GetMap()
     {
         map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey,
             zoom: 1
         });
 
         //Register the custom module.
-        Microsoft.Maps.registerModule('SolarTerminatorModule', 'SolarTerminatorModule.js');
+        Microsoft.Maps.registerModule('SolarTerminatorModule', '/Other/Solar%20Terminator/SolarTerminatorModule.js');
 
         //Load the module.
         Microsoft.Maps.loadModule('SolarTerminatorModule', function () {
@@ -67,9 +66,7 @@
         sunPin.setLocation(terminator.getSunLocation());
     }
     </script>
-
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 
     <style>
         input[type=range]{
@@ -85,7 +82,7 @@
     Day: <input id="DaySlider" type="range" min="0" max="30" oninput="DateUpdated()" onchange="DateUpdated()" /> <span id="DayInfo"></span><br />
     Hour: <input id="HoursSlider" type="range" min="0" max="24" oninput="DateUpdated()" onchange="DateUpdated()"/> <span id="HourInfo"></span>
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>Solar Terminator Sample</legend>
         This sample is of a module that calculates the Solar terminator (shadow of where the sun don't shine) as well as the suns approximate overhead location on the map. 
     </fieldset>

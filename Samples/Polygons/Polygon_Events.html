@@ -7,9 +7,7 @@
     var map;
 
     function GetMap() {
-        map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey
-        });
+        map = new Microsoft.Maps.Map('#myMap', {});
 
         //Create a random polygon.
         var polygon = Microsoft.Maps.TestDataGenerator.getPolygons(1, map.getBounds());
@@ -19,6 +17,7 @@
 
         //Add mouse events to the polygon.
         Microsoft.Maps.Events.addHandler(polygon, 'click', function () { highlight('polygonClick'); });
+        Microsoft.Maps.Events.addHandler(pushpin, 'dblclick', function () { highlight('polygonDoubleClick'); });
         Microsoft.Maps.Events.addHandler(polygon, 'mousedown', function () { highlight('polygonMousedown'); });
         Microsoft.Maps.Events.addHandler(polygon, 'mouseout', function () { highlight('polygonMouseout'); });
         Microsoft.Maps.Events.addHandler(polygon, 'mouseover', function () { highlight('polygonMouseover'); });
@@ -33,13 +32,13 @@
         setTimeout(function () { document.getElementById(id).style.background = 'white'; }, 1000);
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
 
     <div id="polygonClick">click</div>
+    <div id="polygonDoubleClick">dblclick</div>
     <div id="polygonMousedown">mousedown</div>
     <div id="polygonMouseout">mouseout</div>
     <div id="polygonMouseover">mouseover</div>

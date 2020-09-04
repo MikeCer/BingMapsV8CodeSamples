@@ -14,7 +14,6 @@
 
     function GetMap() {
         map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey,
             center: new Microsoft.Maps.Location(-16.366, -46.8945),
             zoom: 17
         });
@@ -48,9 +47,6 @@
 
     function updateImageUrl(imgUrl) {
         overlay.setOptions({ imageUrl: imgUrl });
-
-        //TODO: remove, this is a hack to work around a bug where when changing the source image of a ground overlay, the it doesn't render until the map view changes. fix ETA 8/31
-        Microsoft.Maps.Events.invoke(map, 'viewchange', null);
     }
 
     function beneathLabelsUpdated(beneathLabels) {
@@ -91,8 +87,7 @@
         document.getElementById('rotationInput').innerText = elm.value;
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script async defer src="https://bing.com/api/maps/mapcontrol?callback=GetMap&branch=experimental&uncrunched=1"></script>
+    <script async defer src="https://bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]"></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:500px;"></div>
@@ -122,7 +117,7 @@
     <input type="range" min="0" max="360" step="1" value="0" style="width:100px;padding:0;" oninput="rotationUpdated(this)" onchange="rotationUpdated(this)" />
     <span id="rotationInput">0</span>
   
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>Ground Overlay Options Sample</legend>
         This sample shows how to set an get all options for ground overlays. 
         The ground overlay in this sample is sourced from <a href="https://commons.wikimedia.org/">Wikimedia Commons</a>.

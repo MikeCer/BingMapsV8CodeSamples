@@ -283,6 +283,14 @@ class HtmlPushpin extends Microsoft.Maps.Pushpin {
 
         if (typeof options.visible === 'boolean') {
             this._options.visible = options.visible;
+
+            if (options.visible) {
+                this._element.style.display = '';
+            } else {
+                this._element.style.display = 'none';
+            }
+
+            reposition = true;
         }
 
         if (options.htmlContent) {
@@ -469,7 +477,7 @@ class HtmlPushpinLayer extends Microsoft.Maps.CustomOverlay {
         this._container.style.position = 'absolute';
         this._container.style.left = '0px';
         this._container.style.top = '0px';
-
+        
         this.setHtmlElement(this._container);
     }
 
@@ -506,8 +514,12 @@ class HtmlPushpinLayer extends Microsoft.Maps.CustomOverlay {
         Microsoft.Maps.Events.removeHandler(this._viewChangeEndEventHandler);
         Microsoft.Maps.Events.removeHandler(this._mapResizeEventHandler);
 
-        this.getMap().getRootElement().removeEventListener('mousemove', (e) => { this._updateDragPushpin(<MouseEvent>e); });
-        document.body.removeEventListener('mouseup', (e) => { if (this._dragTarget) { this._dragTarget._pinMouseUp(<MouseEvent>e); } });
+        var map = this.getMap();
+
+        if (map) {
+            map.getRootElement().removeEventListener('mousemove', (e) => { this._updateDragPushpin(<MouseEvent>e); });
+            document.body.removeEventListener('mouseup', (e) => { if (this._dragTarget) { this._dragTarget._pinMouseUp(<MouseEvent>e); } });
+        }
     }
 
     /**********************
@@ -627,20 +639,22 @@ class HtmlPushpinLayer extends Microsoft.Maps.CustomOverlay {
     * Updates the position of a HTML pushpin element on the map.
     */
     public _updatePushpinPosition(pin: HtmlPushpin): void {
-        var map = this.getMap();
+        if (pin.getVisible()) {
+            var map = this.getMap();
 
-        if (map) {
-            //Calculate the pixel location of the pushpin.
-            var topLeft = <Microsoft.Maps.Point>map.tryLocationToPixel(pin.getLocation(), Microsoft.Maps.PixelReference.control);
+            if (map) {
+                //Calculate the pixel location of the pushpin.
+                var topLeft = <Microsoft.Maps.Point>map.tryLocationToPixel(pin.getLocation(), Microsoft.Maps.PixelReference.control);
 
-            //Offset position to account for anchor.
-            var anchor = pin.getAnchor();
-            topLeft.x -= anchor.x;
-            topLeft.y -= anchor.y;
+                //Offset position to account for anchor.
+                var anchor = pin.getAnchor();
+                topLeft.x -= anchor.x;
+                topLeft.y -= anchor.y;
 
-            //Update the position of the pushpin element.
-            pin._element.style.left = topLeft.x + 'px';
-            pin._element.style.top = topLeft.y + 'px';
+                //Update the position of the pushpin element.
+                pin._element.style.left = topLeft.x + 'px';
+                pin._element.style.top = topLeft.y + 'px';
+            }
         }
     }
 

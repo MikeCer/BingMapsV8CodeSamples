@@ -8,7 +8,6 @@
 
     function GetMap() {
         map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey,
             center: new Microsoft.Maps.Location(51, 7),
             zoom: 9
         });
@@ -21,13 +20,12 @@
         map.layers.insert(overlay);
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script async defer src="https://bing.com/api/maps/mapcontrol?callback=GetMap"></script>
+    <script async defer src="https://bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]"></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>SVG Ground Overlay Sample</legend>
         This sample shows how using an SVG as a ground overlay ensures that no matter how much you zoom into the ground overlay, it stays crisp and clear. 
         However, a ground overlay is only as accurate as the scale at which it was drawn.

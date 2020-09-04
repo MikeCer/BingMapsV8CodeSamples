@@ -4,12 +4,10 @@
     <title></title>
     <meta charset="utf-8" />
     <script type='text/javascript'>
-        var YourBingMapsKey = YourBingMapsKey;
         var mainMap, alaskaMap, hawaiiMap;
 
         function GetMap() {
             mainMap = new Microsoft.Maps.Map('#mainMap', {
-                credentials: YourBingMapsKey,
                 maxBounds: Microsoft.Maps.LocationRect.fromEdges(50, -128, 23, -66),
                 center: new Microsoft.Maps.Location(37, -90),
                 zoom: 3,
@@ -17,7 +15,6 @@
             });
 
             alaskaMap = new Microsoft.Maps.Map('#alaskaMap', {
-                credentials: YourBingMapsKey,
                 showDashboard: false,
                 showMapTypeSelector: false,
                 showLocateMeButton: false,
@@ -31,7 +28,6 @@
             });
 
             hawaiiMap = new Microsoft.Maps.Map('#hawaiiMap', {
-                credentials: YourBingMapsKey,
                 showDashboard: false,
                 showMapTypeSelector: false,
                 showLocateMeButton: false,
@@ -57,8 +53,7 @@
             hawaiiMap.entities.push(Microsoft.Maps.WellKnownText.read(HawaiiMask, { polygonOptions: { fillColor: 'rgb(0, 0, 0)', strokeColor: 'transparent' } }));
         }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
     <style>
         .mapContainer, #mainMap{
             position:relative;

@@ -10,9 +10,7 @@
     var sdsDataSourceUrl = 'http://spatial.virtualearth.net/REST/v1/data/f22876ec257b474b82fe2ffcb8393150/NavteqNA/NavteqPOIs';
 
     function GetMap() {
-        map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey
-        });
+        map = new Microsoft.Maps.Map('#myMap', {});
 
         //Create an infobox to display content for each result.
         infobox = new Microsoft.Maps.Infobox(map.getCenter(), { visible: false });
@@ -69,13 +67,12 @@
         });
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>Find Nearby Search using the SDS Query API Sample</legend>
         This sample shows how to do a nearby search using the Bing Spatial Data Services Query API to find gas stations that are within 25km of the center of the map. 
         Move the map to load data for the new map view. Click on a pushpin to see some basic information for that location.

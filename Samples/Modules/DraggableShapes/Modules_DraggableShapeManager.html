@@ -9,14 +9,13 @@
     function GetMap()
     {
         map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey,
             zoom:3
         });
 
         var polygon = Microsoft.Maps.TestDataGenerator.getPolygons(1, map.getBounds());
         map.entities.push(polygon);
 
-        Microsoft.Maps.registerModule('DraggableShapesModule', 'DraggableShapesModule.js');
+        Microsoft.Maps.registerModule('DraggableShapesModule', '/Modules/DraggableShapes/DraggableShapesModule.js');
         Microsoft.Maps.loadModule('DraggableShapesModule', function () {
             dragManager = new DraggableShapesManager(map);
             dragManager.makeDraggable(polygon);
@@ -31,8 +30,7 @@
         }        
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:600px;"></div>

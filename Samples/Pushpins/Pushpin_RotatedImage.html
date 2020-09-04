@@ -7,11 +7,9 @@
     var map;
 
     function GetMap() {
-        map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey
-        });
+        map = new Microsoft.Maps.Map('#myMap', {});
 
-        createRotatedImagePushpin(map.getCenter(), 'images/ssMap.png', 45, function (pin) {
+        createRotatedImagePushpin(map.getCenter(), '/Common/images/pushpins/ssMap.png', 45, function (pin) {
             map.entities.push(pin);
         });
     }
@@ -54,8 +52,7 @@
         img.src = url;
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:600px;"></div>

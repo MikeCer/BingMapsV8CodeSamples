@@ -181,16 +181,11 @@
         }
     };
 
-    function GetMap()
-    {
-        map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey
-        });
+    function GetMap() {
+        map = new Microsoft.Maps.Map('#myMap', {});
     }
     </script>
-
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&branch=experimental' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
 </head>
 <body>
     <div id="myMap" style="position:relative;width:800px;height:600px;"></div><br/>
@@ -202,7 +197,7 @@
     <input type="button" onclick="map.setOptions({ customMapStyle: fadedMap })" value="Faded Map" />
     <input type="button" onclick="map.setOptions({ customMapStyle: {} })" value="Clear Custom Style" />
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>Set Custom Map Style Sample</legend>
         This sample shows how to set the custom map style after the map is loaded.
     </fieldset>

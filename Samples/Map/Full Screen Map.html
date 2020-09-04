@@ -9,9 +9,7 @@
 
     function GetMap()
     {
-        map = new Microsoft.Maps.Map('#myMap', {
-            credentials: YourBingMapsKey
-        });
+        map = new Microsoft.Maps.Map('#myMap', {});
 
         if (fullScreenEnabled) {
             //Use an event to detect when entering/exiting full screen as user may use esc to exit full screen.
@@ -32,7 +30,7 @@
             document.getElementById('fullScreenToggle').disabled = true;
         }
 
-        //Clustering added to map to give use something to look at.
+        //Clustering added to map to give us something to look at.
 
         //Load the Clustering module.
         Microsoft.Maps.loadModule("Microsoft.Maps.Clustering", function () {
@@ -100,8 +98,7 @@
            document.webkitFullscreenEnabled;
     }
     </script>
-    <script type='text/javascript' src='/BingMapsCredentials.js'></script>
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
     <style>
         .standardMap {
             position:relative;
@@ -123,7 +120,7 @@
         <input id="fullScreenToggle" type="button" value="Toggle Full Screen" onclick="toggleFullScreen()" style="position:absolute;top:10px;left:10px;"/>
     </div>
 
-    <fieldset style="width:600px;margin-top:10px;">
+    <fieldset style="width:800px;margin-top:10px;">
         <legend>Full Screen Map Sample</legend>
         This sample shows how to toggle between displying the standard page layout, and a full screen map view. 
     </fieldset>
